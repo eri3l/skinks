@@ -9,7 +9,7 @@ def app():
     	- The **`Search`** option is for searching by SVL, Trap Location and Toes (intact and missing)
 	""")
     
-    image = '/data/P1060519.jpg'
+    image = 'data/P1060519.jpg'
     st.image(image, caption='El pretty skinko',
          use_column_width = True)
          
