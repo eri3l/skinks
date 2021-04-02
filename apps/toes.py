@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import itertools
+#import pickle5 as pickle	# for python 3.7 
 
 from itertools import chain
 
@@ -16,17 +17,13 @@ def app():
     st.title("Search by missing toes only")
     #--- 1. Load data
     def load_file(filename):
-        #df = pd.read_csv(filename)
-    
-        # pd.eval() to read columns their corresponding dtype (only for str-list), instead of getting converted by by read_csv()
-        df = pd.read_pickle(filename)
         
-        #df = pd.read_csv(filename, converters={'Trap': eval, 'Toes':eval})
-    
+        df = pd.read_csv(filename, converters={'Trap': eval, 'Toes':eval})
+        df['Sex'] = df['Sex'].astype(str)
+
         return df 
     
-    df = load_file("source02.pk")
-    df.drop('Toes missing', axis=1, inplace=True)
+    df = load_file("source02.csv")
     
     #--- 2. Create filter options
     

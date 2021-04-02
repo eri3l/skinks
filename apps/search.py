@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import itertools
+#import pickle5 as pickle	# for python 3.7 
 
 from itertools import chain
 
@@ -15,19 +16,14 @@ def app():
     st.title("Skinks Search Tool")
     #--- 1. Load data
     def load_file(filename):
-        #df = pd.read_csv(filename)
-    
-        # pd.eval() to read columns their corresponding dtype (only for str-list), instead of getting converted by by read_csv()
-        df = pd.read_pickle(filename)
         
-        #df = pd.read_csv(filename, converters={'Trap': eval, 'Toes':eval})
-    
+        df = pd.read_csv(filename, converters={'Trap': eval, 'Toes':eval})
+        df['Sex'] = df['Sex'].astype(str)
+
         return df 
     
-    df = load_file("source02.pk")
+    df = load_file("source02.csv")
     
-    
-    df.drop('Toes missing', axis=1, inplace=True)
     #--- 2. Make button lists
     
     cols = df[['Toes', 'SVL', 'Trap']]
@@ -154,14 +150,5 @@ def app():
     st.table(newdf)
     
     #<sub><sup>combining the two tags</sup></sub>
-    st.markdown('<sup>Your selected criteria are: `SVL`: {},  \n  `Trap`: {},  \n  `Toes`: {}.format(svl_choice, trap_choice, toes_choice)</sup>',
+    st.markdown('Your selected criteria are: `SVL`: {},  \n  `Trap`: {},  \n  `Toes`: {}'.format(svl_choice, trap_choice, toes_choice),
                 unsafe_allow_html=True)
-
-'''
-TODO next:
-    2 pages  for  search by toes,  search by other criteria
-    formatting
-    deploy
-    take input
-    ponder select all
-'''
