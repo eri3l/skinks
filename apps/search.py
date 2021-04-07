@@ -1,40 +1,33 @@
-"""
-re-do streamlit with: 
-    a. Toes, SVL, Traplists
-    b. Toes
-"""
 import pandas as pd
 import numpy as np
 import streamlit as st
 import itertools
-#import pickle5 as pickle	# for python 3.7 
 
 from itertools import chain
 
 def app():
     
-    st.title("Skinks Search Tool")
+    st.write("""## Search by multiple criteria""")
+    
     #--- 1. Load data
     def load_file(filename):
         
         df = pd.read_csv(filename, converters={'Trap': eval, 'Toes':eval})
         df['Sex'] = df['Sex'].astype(str)
-
+    
         return df 
     
     df = load_file("source02.csv")
-    
+       
     #--- 2. Make button lists
     
     cols = df[['Toes', 'SVL', 'Trap']]
     cols_list = list(cols.columns.values)
     
-    #------ st sidebar
-    st.sidebar.title("Select search criteria")
     
     #------ 2.1. SVL
-    
-    svl_choice = st.sidebar.slider("SVL in mm", 0, 100, 50)  
+
+    svl_choice = st.sidebar.slider("SVL (mm):", 0, 100, 50)  
     
     # NB: here add the condition for case where svl=69, it should search +/-5 range, so 65 to 100. 
     # remember that Projected_SVL is set in the makecsv.py file as any >=70 to be 100. 
@@ -82,8 +75,7 @@ def app():
                     'pdk_R14_1st_half', 'pdk_R14_2nd_half', 'pdk_P42_1st_half', 'pdk_P42_2nd_half']:
         dicta[i] = eval(i)
         
-    
-    t_choice = st.sidebar.multiselect("Select a trap group/list: ", trap_options)  # ret str
+    t_choice = st.sidebar.multiselect("Paddock/trap group: ", trap_options)  # ret str
     
     # # debug msg
     # st.write(svl_choice, t_choice)
@@ -109,14 +101,14 @@ def app():
     
     #------ 2.3. Toes
     toes_vals = ['intact', 'toes missing']
-    t_choice = st.sidebar.selectbox("Select toes: ", toes_vals)      # str
+    t_choice = st.sidebar.selectbox("Toes: ", toes_vals)      # str
     toes_choice = []
     missing_vals = np.unique([*itertools.chain.from_iterable(df.Toes)]) # get all unique toes from df.Toes
     
     if t_choice == 'toes missing':
         # add some default here because initially toes_choice is a []
         #toes_choice = missing_vals
-        toes_choice = st.sidebar.multiselect("Select or type missing toes: ", missing_vals)     # list ['LF1']
+        toes_choice = st.sidebar.multiselect("Select or type missing toes:", missing_vals)     # list ['LF1']
         #st.write("Inside: ", type(toes_choice))
     elif t_choice == 'intact':
         toes_choice = []
@@ -146,9 +138,6 @@ def app():
     # or df['Toes'].map(len)!=0
     
     
-    st.write("SEARCH RESULTS")    
-    st.table(newdf)
-    
-    #<sub><sup>combining the two tags</sup></sub>
-    st.markdown('Your selected criteria are: `SVL`: {},  \n  `Trap`: {},  \n  `Toes`: {}'.format(svl_choice, trap_choice, toes_choice),
-                unsafe_allow_html=True)
+    st.write(" ## Search Results: ##")    
+    #st.write(newdf.style.apply(highlight_col, axis=None))
+    st.table(newdf.style.set_properties(**{'background-color': '#cfdaaa'}, subset=['ID']))

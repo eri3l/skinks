@@ -39,6 +39,10 @@ class MultiApp:
         })
 
     def run(self):
+        #st.set_page_config(layout="wide")
+        
+        image = 'data/logo01.png'
+        st.sidebar.image(image) #, use_column_width=True) 
         st.sidebar.title("Navigation")
         app = st.sidebar.radio(
             'Go to',
