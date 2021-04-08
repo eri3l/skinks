@@ -61,6 +61,6 @@ projected_SVL= skink_SVL + delta*(current_year – skink_Year)
     
 
     with st.sidebar.beta_expander("About"):   
-        st.markdown(''' Copyright © 2021 Polina Stucke \
-               NANA BATMAN This app is open source. You can find it on [GitHub](https://github.com/eri3l/skinks) ''')
+        st.markdown(''' Copyright © 2021 Polina Stucke.    
+               This app is open source. You can find it on [GitHub](https://github.com/eri3l/skinks) ''')
 
