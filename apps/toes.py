@@ -22,7 +22,7 @@ def app():
 
 	    return df 
 
-	df = load_file("source02.csv")
+	df = load_file("data/source02.csv")
 
 	#--- 2. Create filter options
 

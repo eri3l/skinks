@@ -4,7 +4,8 @@ def app():
     st.write("## Welcome to the Skink Search Tool app")
 
     st.write(""" 
-                The app filters existing skink data by multiple criteria in order to help with the identification of skinks. \n
+                The app filters existing skink data by multiple criteria in order to help with the identification of skinks. 
+                Latest data update: 10 Apr 2020.  \n
                 Use the navigation bar to select the type of search you would like to perform.
 	""")
     
