@@ -64,14 +64,14 @@ def app():
     pdk_P42_1st_half = ['P42', 'P84', 'R31', 'GM32', 'P90', 'R34', 'R35', 'R36', 'P98', 'R81', 'M41', 'R82']
     pdk_P42_2nd_half = ['R85', 'R86', 'R87', 'R88', 'M48', 'R89', 'R90', 'M50', 'R91', 'R92', 'M52']
     
-    trap_options = ['pdk_R66', 'pdk_R71', 'pdk_R77', 'pdk_R02', 'pdk_R14', 'pdk_P42', 'pdk_R93_removed',
+    trap_options = ['pdk_R66', 'pdk_R71', 'pdk_R77', 'pdk_R02', 'pdk_R07', 'pdk_R14', 'pdk_P42', 'pdk_R93_removed',
                     'pdk_w', 'pdk_b',
                     'pdk_R14_1st_half', 'pdk_R14_2nd_half', 'pdk_P42_1st_half', 'pdk_P42_2nd_half']
     
     dicta = {}
     
     #------- a. create dictionary keys from variables
-    for i in ['pdk_R66', 'pdk_R71', 'pdk_R77', 'pdk_R02', 'pdk_R14', 'pdk_P42', 'pdk_R93_removed',
+    for i in ['pdk_R66', 'pdk_R71', 'pdk_R77', 'pdk_R02', 'pdk_R07', 'pdk_R14', 'pdk_P42', 'pdk_R93_removed',
                     'pdk_w', 'pdk_b',
                     'pdk_R14_1st_half', 'pdk_R14_2nd_half', 'pdk_P42_1st_half', 'pdk_P42_2nd_half']:
         dicta[i] = eval(i)
